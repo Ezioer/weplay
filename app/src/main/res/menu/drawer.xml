@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+   <group
+       android:id="@+id/group1"
+       android:checkableBehavior="single">
+       <item android:id="@+id/douban"
+             android:icon="@mipmap/ic_album_white_24dp"
+             android:title="豆瓣一刻"/>
+       <item android:id="@+id/mylove"
+             android:icon="@mipmap/ic_album_white_24dp"
+             android:title="我喜欢的"/>
+       <item android:id="@+id/list"
+             android:icon="@mipmap/ic_playlist_play_white_24dp"
+             android:title="播放列表"/>
+       </group>
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item android:id="@+id/changestyle"
+              android:icon="@mipmap/ic_audio_wave_48dp"
+              android:title="更改主题"/>
+        <item android:id="@+id/daynight"
+              android:icon="@mipmap/ic_audio_wave_48dp"
+              android:title="夜间模式"/>
+        <item android:id="@+id/setting"
+              android:icon="@mipmap/ic_settings_white_24dp"
+            android:title="设置"/>
+        <item android:id="@+id/about"
+            android:icon="@mipmap/ic_info_white_24dp"
+            android:title="关于"/>
+        <item android:id="@+id/exit"
+              android:icon="@mipmap/ic_arrow_back_white_24dp"
+              android:title="退出"/>
+    </group>
+</menu>

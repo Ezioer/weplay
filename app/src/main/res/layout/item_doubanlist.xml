@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/viewBackground"
+              android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="18sp"
+                android:id="@+id/tv_title"
+                android:textColor="@color/textColorPrimary"
+                android:text="做个农夫只种花"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/tv_subtitle"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:text="比起已经被花艺师打理得精致而美丽的花束，我更喜欢用自己阳台盛开的花朵简单的装饰房间。但自己种花真的不是一件讨巧的事情。"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:id="@+id/iv_pic"
+            android:transitionName="@string/transition_photos"
+            android:scaleType="centerCrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+<View
+    android:background="@color/textColorPrimary"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"/>
+
+</LinearLayout>

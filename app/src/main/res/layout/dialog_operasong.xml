@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="150dp"
+              android:layout_height="wrap_content"
+              android:background="@color/viewBackground"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_add_love"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="添加至我喜欢的"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_watch_singer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="查看歌手"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_watch_album"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="查看专辑"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_song_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="歌曲详情"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_delete_song"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="删除"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"/>
+
+</LinearLayout>

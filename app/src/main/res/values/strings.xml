@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">We Play</string>
+    <string name="actionsetting">setting</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="transition_photos">transition_animation_news_photos</string>
+    <string name="transition_doubanphotos">transition_animation_news_douban_photos</string>
+    <string name="artist_pic">animation_artist_photos</string>
+</resources>
