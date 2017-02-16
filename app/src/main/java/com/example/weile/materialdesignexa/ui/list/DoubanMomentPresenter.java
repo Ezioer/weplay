@@ -39,6 +39,7 @@ public class DoubanMomentPresenter extends DoubanMomentListContract.Presenter {
 
     @Override
     void getDoubanMomentList(final String date,int type) {
+        mView.RequestStart();
         rxManager.add(Observable.just(null)
                 .flatMap(new Func1<Object, Observable<DoubanMomentListBean>>() {
                     @Override

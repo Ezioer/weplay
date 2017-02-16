@@ -47,7 +47,9 @@ public class ViewUtil {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
-                        mContext.finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());  //获取PID
+                        System.exit(0);   //常规java、c#的标准退出法，返回值为0代表正常退出
+//                        mContext.finish();
                     }
                 }).setNegativeButton("再看看", new DialogInterface.OnClickListener() {
             @Override

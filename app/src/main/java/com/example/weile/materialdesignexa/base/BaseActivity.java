@@ -75,7 +75,7 @@ public abstract class BaseActivity extends SwipeActivity {
      * @param permissions
      * @return
      */
-    public boolean hasPermission(String... permissions) {
+    protected boolean hasPermission(String... permissions) {
         for (String permission : permissions) {
             if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
                 return false;
@@ -113,7 +113,7 @@ public abstract class BaseActivity extends SwipeActivity {
                 break;
         }
     }
-    public void initData(){
+    protected void initData(){
     }
     public void goActivity(Class<?> t){
         Intent intent=new Intent(this,t);

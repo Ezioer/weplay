@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.weile.materialdesignexa.R;
 import com.example.weile.materialdesignexa.activity.DoubanMomentDetailActivity;
@@ -77,6 +78,11 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
     }
 
     @Override
+    protected boolean isneedani() {
+        return true;
+    }
+
+    @Override
     protected int getContentLayoutId() {
         return R.layout.fragment_doubanlist;
     }
@@ -99,10 +105,11 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
                 holder.setText(R.id.tv_subtitle, doubanMomentBean.abs);
                 ImageView imageView = holder.getView(R.id.iv_pic);
                 if (doubanMomentBean.thumbs.size()<=0) {
+                    Picasso.with(mContext).load(R.mipmap.nophoto).into(imageView);
                     return;
                 }
                 Picasso.with(mContext).load(doubanMomentBean.thumbs.get(0)
-                        .small.url).into(imageView);
+                        .small.url).into((ImageView) holder.getView(R.id.iv_pic));
             }
         };
         mRvDouban.setAdapter(mAdapter);
@@ -173,26 +180,6 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
                 dialog.show(getActivity().getFragmentManager(), "DatePickerDialog");
             }
         });
-    }
-
-    @Override
-    public void RequestStart() {
-
-    }
-
-    @Override
-    public void Requesterror() {
-
-    }
-
-    @Override
-    public void RequestEnd() {
-
-    }
-
-    @Override
-    public void NetError() {
-
     }
 
 }

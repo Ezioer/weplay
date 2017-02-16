@@ -1,6 +1,7 @@
 package com.example.weile.materialdesignexa.base;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,8 +9,11 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 
+import com.example.weile.materialdesignexa.R;
 import com.example.weile.materialdesignexa.basemvp.BaseModel;
 import com.example.weile.materialdesignexa.basemvp.BasePresenter;
 import com.example.weile.materialdesignexa.basemvp.BaseView;
@@ -23,6 +27,9 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseFrameFragment<P extends BasePresenter,M extends BaseModel> extends Fragment implements BaseView {
     protected Context mContext=null;
+    private View mRoot;
+    private View mLoadingview;
+    private AnimationDrawable mAnimationDrawable;
     protected int mScreenHeight;
     protected int mScreenWidth;
     public P mPresenter;
@@ -52,6 +59,13 @@ public abstract class BaseFrameFragment<P extends BasePresenter,M extends BaseMo
         super.onViewCreated(view, savedInstanceState);
         mContext=getActivity();
         ButterKnife.bind(this,view);
+        mRoot=view;
+        if(isneedani()){
+            mLoadingview = LayoutInflater.from(mContext).inflate(R.layout.viewloading,null);
+            ((ViewGroup)view.getParent()).addView(mLoadingview);
+            ImageView ivload= (ImageView) mLoadingview.findViewById(R.id.iv_loading);
+            mAnimationDrawable= (AnimationDrawable) ivload.getDrawable();
+        }
         initViewAndEvent(savedInstanceState);
         DisplayMetrics displayMetric=new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetric);
@@ -59,6 +73,7 @@ public abstract class BaseFrameFragment<P extends BasePresenter,M extends BaseMo
         mScreenWidth = displayMetric.widthPixels;
     }
 
+    protected abstract boolean isneedani();
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -67,4 +82,30 @@ public abstract class BaseFrameFragment<P extends BasePresenter,M extends BaseMo
     }
     protected abstract int getContentLayoutId();
     protected abstract void initViewAndEvent(Bundle savedInstanceState);
+    @Override
+    public void RequestStart() {
+        if(null!=mAnimationDrawable){
+            mAnimationDrawable.start();
+        }
+        Toast.makeText(mContext,"正在请求数据",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void Requesterror() {
+        Toast.makeText(mContext,"网络错误",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void RequestEnd() {
+        if(null!=mAnimationDrawable){
+            mAnimationDrawable.stop();
+            ((ViewGroup)mRoot.getParent()).removeView(mLoadingview);
+        }
+        Toast.makeText(mContext,"成功获取数据",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void NetError() {
+
+    }
 }

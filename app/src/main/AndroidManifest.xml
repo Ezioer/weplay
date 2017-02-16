@@ -20,15 +20,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/greentheme">
-        <activity android:name=".activity.MainActivity"
-                  android:launchMode="singleTask"
-            >
+        <activity android:name=".activity.SplashActivity"
+            android:theme="@style/AppThemeBase">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MainActivity"
+                  android:theme="@style/AppThemeBase"
+                  android:launchMode="singleTask">
+        </activity>
         <activity android:name=".activity.SingerDetailActivity"/>
+        <activity android:name=".activity.AdActivity"
+                  android:theme="@style/AppThemeBase"/>
+        <activity android:name=".activity.IntroduceActivity"
+                  android:theme="@style/AppThemeBase"/>
         <activity android:name=".activity.AlbumDetailActivity"/>
         <activity android:name=".activity.ThemeSettingActivity"/>
         <activity android:name=".activity.MyLoveActivity"/>

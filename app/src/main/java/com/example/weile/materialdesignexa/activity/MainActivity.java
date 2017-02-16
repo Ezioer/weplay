@@ -31,9 +31,6 @@ import com.example.weile.materialdesignexa.util.Utils;
 import com.example.weile.materialdesignexa.util.ViewUtil;
 import com.example.weile.materialdesignexa.widget.slidinguppanel.SlidingUpPanelLayout;
 
-
-import java.io.InputStream;
-
 import butterknife.Bind;
 
 public class MainActivity extends BaseActivity {

@@ -42,6 +42,11 @@ public class Fragment_doubandetail extends BaseFrameFragment<DoubanDetailPresent
     WebView mWebview;
 
     @Override
+    protected boolean isneedani() {
+        return false;
+    }
+
+    @Override
     protected int getContentLayoutId() {
         return R.layout.fragment_doubanmomentdetail;
     }
@@ -102,23 +107,4 @@ public class Fragment_doubandetail extends BaseFrameFragment<DoubanDetailPresent
 //        mMainContent.setText(Html.fromHtml(doubanMomentDetailBean.content));
     }
 
-    @Override
-    public void RequestStart() {
-
-    }
-
-    @Override
-    public void Requesterror() {
-
-    }
-
-    @Override
-    public void RequestEnd() {
-
-    }
-
-    @Override
-    public void NetError() {
-
-    }
 }

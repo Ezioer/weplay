@@ -105,9 +105,12 @@ public class Fragment_SongList extends BaseFragment {
                     }
                 });
                 String path = SongUtils.getAlbumArt(mContext, song.getAlbumId());
+                ImageView mImageview = holder.getView(R.id.iv_songpic);
                 if (path != null) {
-                    ImageView mImageview = holder.getView(R.id.iv_songpic);
                     Picasso.with(mContext).load(new File(path)).resize(Utils.dp2px(mContext, 50),
+                            Utils.dp2px(mContext, 50)).centerCrop().into(mImageview);
+                }else{
+                    Picasso.with(mContext).load(R.mipmap.ic_album_grey600_48dp).resize(Utils.dp2px(mContext, 50),
                             Utils.dp2px(mContext, 50)).centerCrop().into(mImageview);
                 }
             }
