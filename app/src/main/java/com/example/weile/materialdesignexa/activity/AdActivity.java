@@ -10,8 +10,11 @@ import android.widget.TextView;
 import com.example.weile.materialdesignexa.R;
 import com.example.weile.materialdesignexa.base.BaseActivity;
 
+import java.lang.ref.WeakReference;
+
 import butterknife.Bind;
 import butterknife.BindDimen;
+import rx.internal.schedulers.NewThreadScheduler;
 
 /**
  * Created by weile on 2017/2/14.
@@ -41,19 +44,25 @@ public class AdActivity extends BaseActivity {
         });
     }
     private int count=3;
-    private Handler h=new Handler(){
+    static class myHandler extends Handler{
+        WeakReference<AdActivity> mActivity;
+        myHandler(AdActivity activity){
+            mActivity=new WeakReference<AdActivity>(activity);
+        }
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(count==0){
-                hideAd();
+            AdActivity adActivity=mActivity.get();
+            if(adActivity.count==0){
+                adActivity.hideAd();
             }else {
-                mTvjump.setText("跳过"+count+"秒");
-                h.sendEmptyMessageDelayed(0,1000);
-                count--;
+                adActivity.mTvjump.setText("跳过"+adActivity.count+"秒");
+                adActivity.h.sendEmptyMessageDelayed(0,1000);
+                adActivity.count--;
             }
         }
     };
+    myHandler h=new myHandler(this);
     private void hideAd(){
         Intent intent=new Intent(AdActivity.this,MainActivity.class);
         overridePendingTransition(R.anim.enter_alpha,R.anim.exit_alpha);
