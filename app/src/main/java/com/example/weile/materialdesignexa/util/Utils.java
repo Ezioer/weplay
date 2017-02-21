@@ -7,7 +7,10 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
+import android.os.Environment;
 import android.support.annotation.DrawableRes;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -175,5 +178,44 @@ public class Utils {
     public static boolean fileExist(String path) {
         File file = new File(path);
         return file.exists();
+    }
+    /**
+     * 得到手机的缓存目录
+     *
+     * @param context
+     * @return
+     */
+    public static File getCacheDir(Context context) {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            File cacheDir = context.getExternalCacheDir();
+            if (cacheDir != null && (cacheDir.exists() || cacheDir.mkdirs())) {
+                return cacheDir;
+            }
+        }
+
+        File cacheDir = context.getCacheDir();
+        return cacheDir;
+    }
+
+    /**
+     * 判断网络是否可用
+     *
+     * @param context Context对象
+     */
+    public static Boolean isNetworkReachable(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity == null) {
+
+        } else {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null) {
+                for (int i = 0; i < info.length; i++) {
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

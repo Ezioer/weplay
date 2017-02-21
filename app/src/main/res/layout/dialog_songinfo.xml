@@ -62,6 +62,7 @@
         android:textColor="@color/textColorPrimary"
         android:textSize="18sp"/>
     <LinearLayout
+        android:baselineAligned="false"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"

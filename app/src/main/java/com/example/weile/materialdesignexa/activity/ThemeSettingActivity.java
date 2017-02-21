@@ -61,6 +61,7 @@ public class ThemeSettingActivity extends BaseActivity {
                 preferenceUtils.saveParam("change_theme_key",
                         mThemeAdapter.getPosi());
                 ActivityCollector.getInstance().refreshAllActivity();
+                getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
             }
         });
         setSupportActionBar(mToolbar);

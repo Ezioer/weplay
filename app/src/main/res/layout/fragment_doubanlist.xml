@@ -21,6 +21,7 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/fla_button"
         android:layout_margin="20dp"
+        android:src="@mipmap/ic_event_white_48dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <ImageView

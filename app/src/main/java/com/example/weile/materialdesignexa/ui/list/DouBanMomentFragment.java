@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.weile.materialdesignexa.Adapter.DoubanMomentAdapter;
 import com.example.weile.materialdesignexa.R;
 import com.example.weile.materialdesignexa.activity.DoubanMomentDetailActivity;
 import com.example.weile.materialdesignexa.base.BaseFrameFragment;
@@ -49,7 +50,8 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
     private boolean isrefresh;
     private int mLoadcount = 0;
     private ArrayList<DoubanMomentListBean.Posts> mList=new ArrayList<>();
-    private CommonRecAdapter<DoubanMomentListBean.Posts> mAdapter;
+//    private CommonRecAdapter<DoubanMomentListBean.Posts> mAdapter;
+    private DoubanMomentAdapter mAdapter;
 
     public static DouBanMomentFragment newInstance() {
         return new DouBanMomentFragment();
@@ -96,7 +98,8 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
 
     private void initAdapter() {
         mRvDouban.setLayoutManager(new LinearLayoutManager(mContext));
-        mAdapter = new CommonRecAdapter<DoubanMomentListBean.Posts>(mContext, R.layout.item_doubanlist,
+        mAdapter=new DoubanMomentAdapter(mContext,mList);
+        /*mAdapter = new CommonRecAdapter<DoubanMomentListBean.Posts>(mContext, R.layout.item_doubanlist,
                 mList) {
             @Override
             public void convert(RecycleViewHolder holder, DoubanMomentListBean.Posts doubanMomentBean, int
@@ -111,12 +114,33 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
                 Picasso.with(mContext).load(doubanMomentBean.thumbs.get(0)
                         .small.url).into((ImageView) holder.getView(R.id.iv_pic));
             }
-        };
+        };*/
         mRvDouban.setAdapter(mAdapter);
     }
 
     private void initListener() {
-        mAdapter.setOnItemClickListener(new CommonRecAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new DoubanMomentAdapter.onRecyclerViewOnclicklistener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+                Intent intent=new Intent(mContext, DoubanMomentDetailActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putInt("postid",mList.get(position).id);
+                bundle.putString("title",mList.get(position).title);
+                bundle.putString("url",mList.get(position).url);
+                intent.putExtras(bundle);
+                ImageView imageView= (ImageView) view.findViewById(R.id.iv_pic);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options = ActivityOptions
+                            .makeSceneTransitionAnimation(getActivity(), imageView, "transition_animation_news_douban_photos");
+                    startActivity(intent, options.toBundle());
+                } else {
+                    ActivityOptionsCompat options = ActivityOptionsCompat
+                            .makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0);
+                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+                }
+            }
+        });
+        /*mAdapter.setOnItemClickListener(new CommonRecAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ViewGroup parent, View view, RecyclerView.ViewHolder holder,
                                     int position) {
@@ -137,7 +161,7 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
                     ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
                 }
             }
-        });
+        });*/
         mRefreshLayout.setPtrHandler(new PtrDefaultHandler2() {
             @Override
             public void onLoadMoreBegin(PtrFrameLayout frame) {
