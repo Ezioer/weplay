@@ -19,6 +19,7 @@ import com.example.weile.materialdesignexa.R;
 import com.example.weile.materialdesignexa.service.PlayService;
 import com.example.weile.materialdesignexa.base.BaseActivity;
 import com.example.weile.materialdesignexa.bean.Song;
+import com.example.weile.materialdesignexa.util.CommonDiyRecAdapter;
 import com.example.weile.materialdesignexa.util.CommonRecAdapter;
 import com.example.weile.materialdesignexa.util.RecycleViewHolder;
 import com.example.weile.materialdesignexa.util.SongUtils;
@@ -43,7 +44,7 @@ public class AlbumDetailActivity extends BaseActivity {
     ImageView mImageview;
     @Bind(R.id.rv_albumsongs)
     RecyclerView mRecyclerView;
-    private CommonRecAdapter<Song> mAdapter;
+    private CommonDiyRecAdapter<Song> mAdapter;
     private ArrayList<Song> mList;
     private String albumname;
     private long albumid;
@@ -73,7 +74,7 @@ public class AlbumDetailActivity extends BaseActivity {
                     (AlbumDetailActivity.this), Utils.dp2px(mContext, 300)).into(mImageview);
         }
         mList = SongUtils.getAlbumSongByAlbumid(mContext, albumid);
-        mAdapter = new CommonRecAdapter<Song>(mContext, R.layout.item_songs, mList) {
+        mAdapter = new CommonDiyRecAdapter<Song>(mContext, R.layout.item_songs, mList) {
             @Override
             public void convert(RecycleViewHolder holder,final Song song,int posi) {
                 holder.setText(R.id.tv_songname, song.getName());
@@ -98,7 +99,7 @@ public class AlbumDetailActivity extends BaseActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new CommonRecAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new CommonDiyRecAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ViewGroup parent,View view, RecyclerView.ViewHolder holder, int position) {
                 Intent intent = new Intent();

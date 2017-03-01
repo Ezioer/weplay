@@ -65,7 +65,7 @@ public class ViewUtil {
     private boolean isShowing = false;
 
     public void popSongOpera(final Context mContext, View v, final Song song, int mScreenHeight,
-                             final ArrayList<Song> mSongList, final CommonRecAdapter<Song> mAdapter, final RecyclerView mView) {
+                             final ArrayList<Song> mSongList, final CommonDiyRecAdapter<Song> mAdapter, final RecyclerView mView) {
         if (mDialog == null) {
             View view = LayoutInflater.from(mContext).inflate(R.layout
                     .dialog_operasong, null);
@@ -197,4 +197,5 @@ public class ViewUtil {
                     }
                 }).create().show();
     }
+
 }

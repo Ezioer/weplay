@@ -19,6 +19,7 @@ public abstract class CommonRecAdapter<T> extends RecyclerView.Adapter<RecycleVi
     protected  int mPosi;
     protected OnItemClickListener listener=null;
 
+
     public CommonRecAdapter(Context context, int layoutId, List<T> datas)
     {
         mContext = context;
@@ -26,6 +27,7 @@ public abstract class CommonRecAdapter<T> extends RecyclerView.Adapter<RecycleVi
         mLayoutId = layoutId;
         mDatas = datas;
     }
+
 
     @Override
     public RecycleViewHolder onCreateViewHolder(final ViewGroup parent, int viewType)
@@ -69,4 +71,5 @@ public abstract class CommonRecAdapter<T> extends RecyclerView.Adapter<RecycleVi
     public int getPosi(){
         return mPosi;
     }
+
 }

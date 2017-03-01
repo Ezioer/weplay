@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.weile.materialdesignexa.R;
-import com.example.weile.materialdesignexa.fragment.Fragment_SongList;
+import com.example.weile.materialdesignexa.ui.SongList.Fragment_SongList;
 import com.example.weile.materialdesignexa.fragment.Fragment_ablum;
 import com.example.weile.materialdesignexa.fragment.Fragment_artist;
 import com.example.weile.materialdesignexa.fragment.TabLayoutViewPager;
@@ -27,6 +27,7 @@ import com.example.weile.materialdesignexa.service.LockService;
 import com.example.weile.materialdesignexa.service.PlayService;
 import com.example.weile.materialdesignexa.base.BaseActivity;
 import com.example.weile.materialdesignexa.fragment.Fragment_player;
+import com.example.weile.materialdesignexa.ui.girlphoto.GirlPhotoListActivity;
 import com.example.weile.materialdesignexa.util.Utils;
 import com.example.weile.materialdesignexa.util.ViewUtil;
 import com.example.weile.materialdesignexa.widget.slidinguppanel.SlidingUpPanelLayout;
@@ -90,9 +91,9 @@ public class MainActivity extends BaseActivity {
 
     private void initDayNight() {
         if(Utils.getTagInt(mContext,"daynight",0)==0){
-            mDrawerView.getMenu().getItem(4).setTitle("夜间模式");
+            mDrawerView.getMenu().getItem(5).setTitle("夜间模式");
         }else {
-            mDrawerView.getMenu().getItem(4).setTitle("白天模式");
+            mDrawerView.getMenu().getItem(5).setTitle("白天模式");
         }
     }
 
@@ -181,6 +182,9 @@ public class MainActivity extends BaseActivity {
                     case R.id.douban:
                         goActivity(DoubanMomentActivity.class);
                         break;
+                    case R.id.girl:
+                        goActivity(GirlPhotoListActivity.class);
+                        break;
                     case R.id.mylove:
                         goActivity(MyLoveActivity.class);
                         /*FragmentTransaction transaction1 = getSupportFragmentManager()
@@ -195,6 +199,7 @@ public class MainActivity extends BaseActivity {
                         mToolBar.setTitle("我喜欢的");*/
                         break;
                     case R.id.list:
+                        goActivity(TestActivity.class);
                         break;
                     case R.id.changestyle:
                         goActivity(ThemeSettingActivity.class);

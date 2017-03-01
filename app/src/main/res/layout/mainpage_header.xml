@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:theme="@style/ThemeOverlay.AppCompat.Dark"
+              android:layout_width="match_parent"
+              android:layout_height="200dp">
+<com.example.weile.materialdesignexa.widget.AutoScrollViewPager
+    android:id="@+id/autoviewpager"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+</com.example.weile.materialdesignexa.widget.AutoScrollViewPager>
+    <com.example.weile.materialdesignexa.widget.CirclePageIndicator
+        android:id="@+id/pageindicator"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+</RelativeLayout>

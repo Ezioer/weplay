@@ -191,7 +191,7 @@ public class Fragment_player extends BaseFragment implements View.OnClickListene
             mMiniSongName.setTextColor(colors[1]);
             mMiniSinger.setTextColor(colors[2]);
         } else {
-            new ArtHandler(path, new Utils(mContext).dpToPx(56), intent.getLongExtra("albumid",
+            new ArtHandler(path, Utils.dpToPx(56), intent.getLongExtra("albumid",
                     0), 0, mMiniPlayer, mMiniSongName, mMiniSinger) {
                 @Override
                 public void onColorFetched(int[] colors, long albumId) {
@@ -482,7 +482,7 @@ public class Fragment_player extends BaseFragment implements View.OnClickListene
 
         public void getBitmap() {
             if (path == null || !Utils.fileExist(path))
-                bitmap = new Utils(mContext)
+                bitmap = Utils
                         .getBitmapOfVector(R.mipmap.g1, size, size);
             else {
                 BitmapFactory.Options options = new BitmapFactory.Options();

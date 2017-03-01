@@ -9,11 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.widget.Toast;
 
-import com.example.weile.materialdesignexa.ThemeChange.MyThemeUtils;
-import com.example.weile.materialdesignexa.ThemeChange.PreferenceUtils;
+import com.example.weile.materialdesignexa.themechange.MyThemeUtils;
+import com.example.weile.materialdesignexa.themechange.PreferenceUtils;
 import com.example.weile.materialdesignexa.handle.ActivityCollector;
 import com.example.weile.materialdesignexa.util.Utils;
 

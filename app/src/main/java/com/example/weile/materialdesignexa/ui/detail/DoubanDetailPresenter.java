@@ -18,12 +18,12 @@ public class DoubanDetailPresenter extends DoubanDetailContract.Presenter {
         return new Observer<DoubanMomentDetailBean>(){
             @Override
             public void onCompleted() {
-
+                mView.RequestEnd();
             }
 
             @Override
             public void onError(Throwable e) {
-
+                mView.Requesterror();
             }
 
             @Override
@@ -35,6 +35,7 @@ public class DoubanDetailPresenter extends DoubanDetailContract.Presenter {
     }
     @Override
     void getDetail(final String postid) {
+        mView.RequestStart();
         rxManager.add(Observable.just(null)
         .flatMap(new Func1<Object, Observable<DoubanMomentDetailBean>>() {
             @Override

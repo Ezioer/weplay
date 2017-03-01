@@ -1,4 +1,4 @@
-package com.example.weile.materialdesignexa.ThemeChange;
+package com.example.weile.materialdesignexa.themechange;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.example.weile.materialdesignexa.Adapter;
+package com.example.weile.materialdesignexa.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

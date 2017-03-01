@@ -40,19 +40,19 @@
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-   <!-- <android.support.v4.widget.NestedScrollView
+    <android.support.v4.widget.NestedScrollView
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:background="@color/viewBackground"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
+        <com.example.weile.materialdesignexa.widget.HtmlTextView
             android:padding="10dp"
             android:id="@+id/tv_detailcontent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    </android.support.v4.widget.NestedScrollView>-->
-    <android.support.v4.widget.NestedScrollView
+    </android.support.v4.widget.NestedScrollView>
+    <!--<android.support.v4.widget.NestedScrollView
         android:background="@color/viewBackground"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
@@ -62,5 +62,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </WebView>
-    </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>-->
 </android.support.design.widget.CoordinatorLayout>

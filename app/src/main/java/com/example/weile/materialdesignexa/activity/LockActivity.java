@@ -258,7 +258,6 @@ public class LockActivity extends BaseActivity implements View.OnClickListener {
 
         @Override
         protected void done(@Nullable Object result) {
-//            ((ImageView)holder.getView(R.id.iv_ablum)).setImageBitmap(bitmap);
         }
 
         private void animateViews(int colorBg, int colorName, int colorArtist) {
@@ -330,7 +329,7 @@ public class LockActivity extends BaseActivity implements View.OnClickListener {
 
         public void getBitmap() {
             if (path == null || !Utils.fileExist(path))
-                bitmap = new Utils(mContext)
+                bitmap = Utils
                         .getBitmapOfVector(R.mipmap.g1, size, size);
             else {
                 BitmapFactory.Options options = new BitmapFactory.Options();

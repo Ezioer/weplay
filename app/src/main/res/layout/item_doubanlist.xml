@@ -35,7 +35,6 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:id="@+id/iv_pic"
-            android:transitionName="@string/transition_photos"
             android:scaleType="centerCrop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

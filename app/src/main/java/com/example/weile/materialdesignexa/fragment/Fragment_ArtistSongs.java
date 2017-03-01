@@ -13,6 +13,7 @@ import com.example.weile.materialdesignexa.R;
 import com.example.weile.materialdesignexa.service.PlayService;
 import com.example.weile.materialdesignexa.base.BaseFragment;
 import com.example.weile.materialdesignexa.bean.Song;
+import com.example.weile.materialdesignexa.util.CommonDiyRecAdapter;
 import com.example.weile.materialdesignexa.util.CommonRecAdapter;
 import com.example.weile.materialdesignexa.util.RecycleViewHolder;
 import com.example.weile.materialdesignexa.util.SongUtils;
@@ -29,7 +30,7 @@ import butterknife.Bind;
  * Created by weile on 2016/11/22.
  */
 public class Fragment_ArtistSongs extends BaseFragment {
-    private CommonRecAdapter<Song> mAdapter;
+    private CommonDiyRecAdapter<Song> mAdapter;
     private ArrayList<Song> mList;
     private String artistname;
     @Bind(R.id.rv_songlist)
@@ -55,7 +56,7 @@ public class Fragment_ArtistSongs extends BaseFragment {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mList= SongUtils.getSongListOfArtist(mContext,artistname);
-        mAdapter=new CommonRecAdapter<Song>(mContext,R.layout.item_songs,mList) {
+        mAdapter=new CommonDiyRecAdapter<Song>(mContext,R.layout.item_songs,mList) {
             @Override
             public void convert(RecycleViewHolder holder, final Song song,int posi) {
                 holder.setText(R.id.tv_songname,song.getName());
@@ -77,7 +78,7 @@ public class Fragment_ArtistSongs extends BaseFragment {
             }
         };
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new CommonRecAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new CommonDiyRecAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ViewGroup parent, View view, RecyclerView.ViewHolder holder, int position) {
                 Intent intent=new Intent();

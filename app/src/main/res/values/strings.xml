@@ -6,4 +6,5 @@
     <string name="transition_photos">transition_animation_news_photos</string>
     <string name="transition_doubanphotos">transition_animation_news_douban_photos</string>
     <string name="artist_pic">animation_artist_photos</string>
+    <string name="transition_girlphotos">transition_animation_girlphotos</string>
 </resources>

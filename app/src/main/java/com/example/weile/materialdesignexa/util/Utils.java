@@ -14,8 +14,11 @@ import android.os.Environment;
 import android.support.annotation.DrawableRes;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import com.example.weile.materialdesignexa.MyApplication;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -25,13 +28,9 @@ import java.util.Date;
  * Created by weile on 2016/11/17.
  */
 public class Utils {
-    private Context mContext;
-    public Utils(Context mContext){
-        this.mContext=mContext;
-    }
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public Bitmap getBitmapOfVector(@DrawableRes int id, int height, int width) {
-        Drawable vectorDrawable = mContext.getDrawable(id);
+    public static Bitmap getBitmapOfVector(@DrawableRes int id, int height, int width) {
+        Drawable vectorDrawable = MyApplication.mContext.getDrawable(id);
         if (vectorDrawable != null)
             vectorDrawable.setBounds(0, 0, width, height);
         Bitmap bm = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -40,15 +39,15 @@ public class Utils {
             vectorDrawable.draw(canvas);
         return bm;
     }
-    public int getWindowWidth() {
-        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+    public static int getWindowWidth() {
+        WindowManager wm = (WindowManager) MyApplication.mContext.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
         return metrics.widthPixels;
     }
-    public int dpToPx(int dp) {
-        DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
+    public static int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = MyApplication.mContext.getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
     public static void setTagInt(Context context, String tag, int tagvalue) {
@@ -217,5 +216,49 @@ public class Utils {
             }
         }
         return false;
+    }
+
+    /**
+     * 设置某个View的margin
+     *
+     * @param view   需要设置的view
+     * @param isDp   需要设置的数值是否为DP
+     * @param left   左边距
+     * @param right  右边距
+     * @param top    上边距
+     * @param bottom 下边距
+     * @return
+     */
+    public static ViewGroup.LayoutParams setViewMargin(View view, boolean isDp, int left, int right, int top, int bottom) {
+        if (view == null) {
+            return null;
+        }
+
+        int leftPx = left;
+        int rightPx = right;
+        int topPx = top;
+        int bottomPx = bottom;
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        ViewGroup.MarginLayoutParams marginParams = null;
+        //获取view的margin设置参数
+        if (params instanceof ViewGroup.MarginLayoutParams) {
+            marginParams = (ViewGroup.MarginLayoutParams) params;
+        } else {
+            //不存在时创建一个新的参数
+            marginParams = new ViewGroup.MarginLayoutParams(params);
+        }
+
+        //根据DP与PX转换计算值
+        if (isDp) {
+            leftPx = dpToPx(left);
+            rightPx = dpToPx(right);
+            topPx = dpToPx(top);
+            bottomPx = dpToPx(bottom);
+        }
+        //设置margin
+        marginParams.setMargins(leftPx, topPx, rightPx, bottomPx);
+        view.setLayoutParams(marginParams);
+        view.requestLayout();
+        return marginParams;
     }
 }

@@ -44,7 +44,7 @@ public class AdActivity extends BaseActivity {
         });
     }
     private int count=3;
-    static class myHandler extends Handler{
+    final static class myHandler extends Handler{
         WeakReference<AdActivity> mActivity;
         myHandler(AdActivity activity){
             mActivity=new WeakReference<AdActivity>(activity);
@@ -53,16 +53,24 @@ public class AdActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             AdActivity adActivity=mActivity.get();
-            if(adActivity.count==0){
-                adActivity.hideAd();
-            }else {
-                adActivity.mTvjump.setText("跳过"+adActivity.count+"秒");
-                adActivity.h.sendEmptyMessageDelayed(0,1000);
-                adActivity.count--;
+            if(adActivity!=null){
+                if(adActivity.count==0){
+                    adActivity.hideAd();
+                }else {
+                    adActivity.mTvjump.setText("跳过"+adActivity.count+"秒");
+                    adActivity.h.sendEmptyMessageDelayed(0,1000);
+                    adActivity.count--;
+                }
             }
         }
     };
     myHandler h=new myHandler(this);
+    private final static Runnable myRunnable =new Runnable(){
+        @Override
+        public void run() {
+
+        }
+    };
     private void hideAd(){
         Intent intent=new Intent(AdActivity.this,MainActivity.class);
         overridePendingTransition(R.anim.enter_alpha,R.anim.exit_alpha);

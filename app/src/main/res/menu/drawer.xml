@@ -6,6 +6,9 @@
        <item android:id="@+id/douban"
              android:icon="@mipmap/ic_album_white_24dp"
              android:title="豆瓣一刻"/>
+       <item android:id="@+id/girl"
+             android:icon="@mipmap/ic_event_white_48dp"
+             android:title="福利"/>
        <item android:id="@+id/mylove"
              android:icon="@mipmap/ic_album_white_24dp"
              android:title="我喜欢的"/>

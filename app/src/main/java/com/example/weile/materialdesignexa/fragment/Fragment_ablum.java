@@ -105,8 +105,7 @@ public class Fragment_ablum extends BaseFragment {
                     TextView numtext = holder.getView(R.id.num);
                     numtext.setTextColor(colors[2]);
                 } else {
-                    new ArtHandler(path, holder, (new Utils(mContext).getWindowWidth() - new
-                            Utils(mContext).dpToPx(1)) / 2, album.getAlbumId(), 1) {
+                    new ArtHandler(path, holder, (Utils.getWindowWidth() - Utils.dpToPx(1)) / 2, album.getAlbumId(), 1) {
                         @Override
                         public void onColorFetched(int[] colors, long albumId) {
                             ColorCache.getinstance().getLru().put(album.getAlbumId(), colors);
@@ -260,7 +259,7 @@ public class Fragment_ablum extends BaseFragment {
 
         public void getBitmap() {
             if (path == null || !Utils.fileExist(path))
-                bitmap = new Utils(mContext)
+                bitmap = Utils
                         .getBitmapOfVector(R.mipmap.g1, size, size);
             else {
                 BitmapFactory.Options options = new BitmapFactory.Options();

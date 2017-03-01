@@ -60,7 +60,9 @@ public class IntroduceActivity extends BaseActivity implements View.OnClickListe
             public void onPageSelected(int position) {
                 if(position==mList.size()-1){
                     mStart.setVisibility(View.VISIBLE);
+                    mIndicator.setVisibility(View.GONE);
                 }else{
+                    mIndicator.setVisibility(View.VISIBLE);
                     mStart.setVisibility(View.GONE);
                 }
             }

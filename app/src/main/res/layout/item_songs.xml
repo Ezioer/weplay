@@ -77,11 +77,11 @@
             android:src="@mipmap/more_green"/>
     </RelativeLayout>
 
-    <View
+   <!-- <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_below="@+id/iv_songpic"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/textColorPrimary"/>
+        android:background="@color/textColorPrimary"/>-->
 </LinearLayout>

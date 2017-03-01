@@ -26,6 +26,7 @@ public class DoubanMomentDetailBean implements Parcelable {
     public String share_pic_url;
     public String type;
     public boolean isliked;
+    public ArrayList<Photos> photos;
     public String public_time;
     public String url;
     public Authors author;
@@ -45,6 +46,7 @@ public class DoubanMomentDetailBean implements Parcelable {
         this.content=in.readString();
         this.share_pic_url=in.readString();
         this.type=in.readString();
+        this.photos=in.createTypedArrayList(Photos.CREATOR);
         this.public_time=in.readString();
         this.url=in.readString();
         this.author=in.readParcelable(Authors.class.getClassLoader());
@@ -67,6 +69,7 @@ public class DoubanMomentDetailBean implements Parcelable {
         parcel.writeString(this.content);
         parcel.writeString(this.share_pic_url);
         parcel.writeString(this.type);
+        parcel.writeTypedList(this.photos);
         parcel.writeString(this.public_time);
         parcel.writeString(this.url);
         parcel.writeParcelable(this.author,i);
@@ -311,7 +314,7 @@ public class DoubanMomentDetailBean implements Parcelable {
             }
         };
     }
-    public static class photos implements Parcelable {
+    public static class Photos implements Parcelable {
         public Medium medium;
         public String description;
         public Large large;
@@ -434,10 +437,10 @@ public class DoubanMomentDetailBean implements Parcelable {
             parcel.writeInt(this.id);
         }
 
-        public photos() {
+        public Photos() {
         }
 
-        protected photos(Parcel in) {
+        protected Photos(Parcel in) {
             this.medium=in.readParcelable(Medium.class.getClassLoader());
             this.description=in.readString();
             this.large=in.readParcelable(Medium.class.getClassLoader());
@@ -447,16 +450,16 @@ public class DoubanMomentDetailBean implements Parcelable {
 
         }
 
-        public static final Parcelable.Creator<photos> CREATOR = new Parcelable
-                .Creator<photos>() {
+        public static final Parcelable.Creator<Photos> CREATOR = new Parcelable
+                .Creator<Photos>() {
             @Override
-            public photos createFromParcel(Parcel source) {
-                return new photos(source);
+            public Photos createFromParcel(Parcel source) {
+                return new Photos(source);
             }
 
             @Override
-            public photos[] newArray(int size) {
-                return new photos[size];
+            public Photos[] newArray(int size) {
+                return new Photos[size];
             }
         };
     }

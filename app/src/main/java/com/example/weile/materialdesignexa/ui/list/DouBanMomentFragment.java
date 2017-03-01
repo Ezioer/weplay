@@ -10,22 +10,17 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.weile.materialdesignexa.Adapter.DoubanMomentAdapter;
+import com.example.weile.materialdesignexa.adapter.DoubanMomentAdapter;
 import com.example.weile.materialdesignexa.R;
 import com.example.weile.materialdesignexa.activity.DoubanMomentDetailActivity;
 import com.example.weile.materialdesignexa.base.BaseFrameFragment;
 import com.example.weile.materialdesignexa.bean.DoubanMomentListBean;
-import com.example.weile.materialdesignexa.util.CommonRecAdapter;
-import com.example.weile.materialdesignexa.util.RecycleViewHolder;
 import com.example.weile.materialdesignexa.util.Utils;
 import com.example.weile.materialdesignexa.widget.ptr_layout.PtrClassicFrameLayout;
 import com.example.weile.materialdesignexa.widget.ptr_layout.PtrDefaultHandler2;
 import com.example.weile.materialdesignexa.widget.ptr_layout.PtrFrameLayout;
-import com.squareup.picasso.Picasso;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
@@ -50,7 +45,6 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
     private boolean isrefresh;
     private int mLoadcount = 0;
     private ArrayList<DoubanMomentListBean.Posts> mList=new ArrayList<>();
-//    private CommonRecAdapter<DoubanMomentListBean.Posts> mAdapter;
     private DoubanMomentAdapter mAdapter;
 
     public static DouBanMomentFragment newInstance() {
@@ -99,22 +93,6 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
     private void initAdapter() {
         mRvDouban.setLayoutManager(new LinearLayoutManager(mContext));
         mAdapter=new DoubanMomentAdapter(mContext,mList);
-        /*mAdapter = new CommonRecAdapter<DoubanMomentListBean.Posts>(mContext, R.layout.item_doubanlist,
-                mList) {
-            @Override
-            public void convert(RecycleViewHolder holder, DoubanMomentListBean.Posts doubanMomentBean, int
-                    posi) {
-                holder.setText(R.id.tv_title, doubanMomentBean.title);
-                holder.setText(R.id.tv_subtitle, doubanMomentBean.abs);
-                ImageView imageView = holder.getView(R.id.iv_pic);
-                if (doubanMomentBean.thumbs.size()<=0) {
-                    Picasso.with(mContext).load(R.mipmap.nophoto).into(imageView);
-                    return;
-                }
-                Picasso.with(mContext).load(doubanMomentBean.thumbs.get(0)
-                        .small.url).into((ImageView) holder.getView(R.id.iv_pic));
-            }
-        };*/
         mRvDouban.setAdapter(mAdapter);
     }
 
@@ -127,41 +105,13 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
                 bundle.putInt("postid",mList.get(position).id);
                 bundle.putString("title",mList.get(position).title);
                 bundle.putString("url",mList.get(position).url);
-                intent.putExtras(bundle);
-                ImageView imageView= (ImageView) view.findViewById(R.id.iv_pic);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions
-                            .makeSceneTransitionAnimation(getActivity(), imageView, "transition_animation_news_douban_photos");
-                    startActivity(intent, options.toBundle());
-                } else {
-                    ActivityOptionsCompat options = ActivityOptionsCompat
-                            .makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0);
-                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+                if(mList.get(position).thumbs.size()!=0){
+                    bundle.putString("picurl",mList.get(position).thumbs.get(0).large.url);
                 }
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
-        /*mAdapter.setOnItemClickListener(new CommonRecAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(ViewGroup parent, View view, RecyclerView.ViewHolder holder,
-                                    int position) {
-                Intent intent=new Intent(mContext, DoubanMomentDetailActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putInt("postid",mList.get(position).id);
-                bundle.putString("title",mList.get(position).title);
-                bundle.putString("url",mList.get(position).url);
-                intent.putExtras(bundle);
-                ImageView imageView= (ImageView) view.findViewById(R.id.iv_pic);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions
-                            .makeSceneTransitionAnimation(getActivity(), imageView, "transition_animation_news_douban_photos");
-                    startActivity(intent, options.toBundle());
-                } else {
-                    ActivityOptionsCompat options = ActivityOptionsCompat
-                            .makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0);
-                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
-                }
-            }
-        });*/
         mRefreshLayout.setPtrHandler(new PtrDefaultHandler2() {
             @Override
             public void onLoadMoreBegin(PtrFrameLayout frame) {
@@ -193,14 +143,11 @@ public class DouBanMomentFragment extends BaseFrameFragment<DoubanMomentPresente
                         mPresenter.getDoubanMomentList(Utils.getDay(temp.getTimeInMillis()),0);
                     }
                 }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
-
                 dialog.setMaxDate(Calendar.getInstance());
                 Calendar minDate = Calendar.getInstance();
                 minDate.set(2016, 1, 13);
                 dialog.setMinDate(minDate);
-                // set the dialog not vibrate when date change, default value is true
                 dialog.vibrate(false);
-
                 dialog.show(getActivity().getFragmentManager(), "DatePickerDialog");
             }
         });

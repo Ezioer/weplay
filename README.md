@@ -2,11 +2,16 @@
 
 #weplay
 ####一个本地音乐播放器（使用Android material design设计）和豆瓣一刻阅读（RxJava/RxAndroid+Retrofit+Picasso）
-**主界面采用tablayout+viewpager+CoordinatorLayout**
-**侧滑菜单使用DrawerLayout和NavigationView，icon使用google开源的图标库**
-**项目分为两部分，音乐播放器和豆瓣一刻阅读**
-**音乐播放器整体使用google material         design设计，数据库保存喜欢的歌曲信息，通知栏和锁屏展示正在播放的歌曲信息**
-**豆瓣一刻使用mvp+rxjava+retrofit，butterknif注解，picass加载图片，对okhttpclient进行了缓存配置**
+**主界面采用tablayout+viewpager+CoordinatorLayout**  
+
+**侧滑菜单使用DrawerLayout和NavigationView，icon使用google开源的图标库**  
+
+**项目分为两部分，音乐播放器和豆瓣一刻阅读**  
+
+**音乐播放器整体使用google material         design设计，数据库保存喜欢的歌曲信息，通知栏和锁屏展示正在播放的歌曲信息**  
+
+**豆瓣一刻使用mvp+rxjava+retrofit，butterknif注解，picass加载图片，对okhttpclient进行了缓存配置**  
+
 #####以下是部分截图
 ![主界面](https://github.com/Ezioer/weplay/blob/master/Screenshots/Screenshot_20170220-142817.png)
 ![专辑列表](https://github.com/Ezioer/weplay/blob/master/Screenshots/Screenshot_20170220-142822.png)
@@ -234,6 +239,20 @@
 
 
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

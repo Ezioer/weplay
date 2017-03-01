@@ -27,6 +27,7 @@
                 android:id="@+id/iv_lovepic"
                 android:scaleType="centerCrop"
                 android:minHeight="300dp"
+                android:src="@mipmap/summer"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"/>
             <android.support.v7.widget.Toolbar

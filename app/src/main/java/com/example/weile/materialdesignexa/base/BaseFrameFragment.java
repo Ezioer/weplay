@@ -60,6 +60,7 @@ public abstract class BaseFrameFragment<P extends BasePresenter,M extends BaseMo
         mContext=getActivity();
         ButterKnife.bind(this,view);
         mRoot=view;
+        //判断当前页面是否需要加载动画
         if(isneedani()){
             mLoadingview = LayoutInflater.from(mContext).inflate(R.layout.viewloading,null);
             ((ViewGroup)view.getParent()).addView(mLoadingview);

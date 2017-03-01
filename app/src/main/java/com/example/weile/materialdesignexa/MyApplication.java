@@ -5,6 +5,9 @@ import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.example.weile.materialdesignexa.util.Utils;
+import com.example.weile.materialdesignexa.widget.GlideImageLoader;
+import com.imnjh.imagepicker.PickerConfig;
+import com.imnjh.imagepicker.SImagePicker;
 import com.karumi.dexter.Dexter;
 
 /**
@@ -22,6 +25,10 @@ public class MyApplication extends Application {
         instance=this;
         Dexter.initialize(this);
         mContext=getApplicationContext();
+        SImagePicker.init(new PickerConfig.Builder().setAppContext(this)
+                .setImageLoader(new GlideImageLoader())
+                .setToolbaseColor(getResources().getColor(R.color.colorPrimary))
+                .build());
         if(Utils.getTagInt(mContext,"daynight",0)==0){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }else {
