@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="200dp">
 <ImageView
@@ -9,6 +10,13 @@
     android:scaleType="centerCrop"
     android:layout_width="match_parent"
     android:layout_height="200dp"/>
+    <com.example.weile.materialdesignexa.widget.CircleImageView
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/iv_avator_bg"
+        android:src="@mipmap/face_default"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
     <TextView
         android:id="@+id/tv_headersongname"
         android:text="我们的时光"

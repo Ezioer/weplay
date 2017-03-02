@@ -33,11 +33,13 @@
             android:orientation="vertical">
 
             <TextView
+                android:freezesText="true"
                 android:id="@+id/tv_miniSongname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:freezesText="true"
                 android:id="@+id/tv_miniSinger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -55,6 +57,7 @@
 
             <TextView
                 android:id="@+id/tv_miniPause"
+                android:freezesText="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -62,6 +65,7 @@
                 android:padding="2dp"/>
 
             <TextView
+                android:freezesText="true"
                 android:id="@+id/tv_miniNext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

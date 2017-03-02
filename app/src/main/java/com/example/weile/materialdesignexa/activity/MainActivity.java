@@ -1,6 +1,7 @@
 package com.example.weile.materialdesignexa.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -16,25 +17,33 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.weile.materialdesignexa.R;
 import com.example.weile.materialdesignexa.ui.SongList.Fragment_SongList;
-import com.example.weile.materialdesignexa.fragment.Fragment_ablum;
-import com.example.weile.materialdesignexa.fragment.Fragment_artist;
-import com.example.weile.materialdesignexa.fragment.TabLayoutViewPager;
+import com.example.weile.materialdesignexa.ui.album.Fragment_ablum;
+import com.example.weile.materialdesignexa.ui.artist.Fragment_artist;
+import com.example.weile.materialdesignexa.util.TabLayoutViewPager;
 import com.example.weile.materialdesignexa.service.LockService;
 import com.example.weile.materialdesignexa.service.PlayService;
 import com.example.weile.materialdesignexa.base.BaseActivity;
-import com.example.weile.materialdesignexa.fragment.Fragment_player;
 import com.example.weile.materialdesignexa.ui.girlphoto.GirlPhotoListActivity;
+import com.example.weile.materialdesignexa.ui.doubanmomentlist.DoubanMomentActivity;
 import com.example.weile.materialdesignexa.util.Utils;
 import com.example.weile.materialdesignexa.util.ViewUtil;
+import com.example.weile.materialdesignexa.widget.CacheManager;
+import com.example.weile.materialdesignexa.widget.CircleImageView;
 import com.example.weile.materialdesignexa.widget.slidinguppanel.SlidingUpPanelLayout;
+import com.imnjh.imagepicker.SImagePicker;
+import com.imnjh.imagepicker.activity.PhotoPickerActivity;
 
 import butterknife.Bind;
 
 public class MainActivity extends BaseActivity {
+    public static final int REQUEST_CODE_AVATAR = 100;
+    public static final String AVATAR_FILE_NAME = "avatar.png";
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
     @Bind(R.id.drawlayout)
@@ -47,10 +56,14 @@ public class MainActivity extends BaseActivity {
     TabLayout mTabLayout;
     @Bind(R.id.mViewPager)
     ViewPager mViewpager;
+    private CircleImageView mAvator;
     private Fragment[] mFragment;
     private String[] title = {"音乐", "艺术家", "专辑"};
     private TabLayoutViewPager mTabLayoutViewPager;
     private Fragment_player mPlayFragment;
+    private Fragment_SongList mSongListFragment;
+    private Fragment_ablum mAblumFrgment;
+    private Fragment_artist mArtistFragment;
     private View mNavigationHeader;
     public static boolean MainActivityIsRunning= false;
 
@@ -63,6 +76,14 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         MainActivityIsRunning=false;
+    }
+
+    @Override
+    public void recreate() {
+        super.recreate();
+        Intent intent=new Intent();
+        intent.setAction(PlayService.UPDATESTATE);
+        mContext.sendBroadcast(intent);
     }
 
     @Override
@@ -117,12 +138,13 @@ public class MainActivity extends BaseActivity {
 
     private void initNavigation() {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag("fragment");
-        if (fragment != null && !fragment.isVisible()) {
+        if (fragment != null) {
             ((Fragment_player) fragment).setSlidingPaneLayout(mSlidingPane);
             ((Fragment_player) fragment).setNavigationHeader(mNavigationHeader);
             getSupportFragmentManager().beginTransaction().show(fragment).commit();
         } else {
-            mPlayFragment = Fragment_player.newInstance();
+            Bundle bundle=new Bundle();
+            mPlayFragment = Fragment_player.newInstance(bundle);
             mPlayFragment.setNavigationHeader(mNavigationHeader);
             mPlayFragment.setSlidingPaneLayout(mSlidingPane);
             getSupportFragmentManager().beginTransaction().add(R.id.slidingpane, mPlayFragment,
@@ -140,6 +162,39 @@ public class MainActivity extends BaseActivity {
         mDrawerLayout.setDrawerListener(drawerToggle);
         setupdrawercontent(mDrawerView);
         mNavigationHeader = mDrawerView.getHeaderView(0);
+        mAvator= (CircleImageView) mNavigationHeader.findViewById(R.id.iv_avator_bg);
+        Glide.with(mContext).load(Utils.getTagString(mContext,"mavatarpath","")).placeholder(R.mipmap.face_default).into(mAvator);
+        mAvator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectAvator();
+            }
+        });
+    }
+
+    private void selectAvator() {
+        SImagePicker
+                .from(MainActivity.this)
+                .pickMode(SImagePicker.MODE_AVATAR)
+                .showCamera(true)
+                .cropFilePath(
+                        CacheManager.getInstance().getImageInnerCache()
+                                .getAbsolutePath(AVATAR_FILE_NAME))
+                .forResult(REQUEST_CODE_AVATAR);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if(requestCode==REQUEST_CODE_AVATAR){
+                Glide.with(mContext).load(CacheManager.getInstance().getImageInnerCache()
+                        .getAbsolutePath(AVATAR_FILE_NAME)).into(mAvator);
+                Utils.setTagString(mContext,"mavatarpath",CacheManager.getInstance().getImageInnerCache()
+                        .getAbsolutePath(AVATAR_FILE_NAME));
+            }
+        }
     }
 
     private void initListener() {

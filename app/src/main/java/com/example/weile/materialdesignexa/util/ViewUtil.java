@@ -17,8 +17,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.weile.materialdesignexa.R;
-import com.example.weile.materialdesignexa.activity.AlbumDetailActivity;
-import com.example.weile.materialdesignexa.activity.SingerDetailActivity;
+import com.example.weile.materialdesignexa.ui.album.AlbumDetailActivity;
+import com.example.weile.materialdesignexa.ui.artist.SingerDetailActivity;
 import com.example.weile.materialdesignexa.bean.Song;
 import com.example.weile.materialdesignexa.db.DBHelper;
 

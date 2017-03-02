@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,8 @@ import com.example.weile.materialdesignexa.base.BaseActivity;
 import com.example.weile.materialdesignexa.bean.LoveSong;
 import com.example.weile.materialdesignexa.db.DBHelper;
 import com.example.weile.materialdesignexa.service.PlayService;
+import com.example.weile.materialdesignexa.ui.album.AlbumDetailActivity;
+import com.example.weile.materialdesignexa.ui.artist.SingerDetailActivity;
 import com.example.weile.materialdesignexa.util.CommonRecAdapter;
 import com.example.weile.materialdesignexa.util.RecycleViewHolder;
 import com.example.weile.materialdesignexa.util.SongUtils;
@@ -79,6 +82,7 @@ public class MyLoveActivity extends BaseActivity {
             return;
         }
         mRvLoveSong.setLayoutManager(new LinearLayoutManager(mContext));
+        mRvLoveSong.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
         mAdapter=new CommonRecAdapter<LoveSong>(mContext,R.layout.item_songs,mlist) {
             @Override
             public void convert(RecycleViewHolder holder, final LoveSong loveSong,int posi) {

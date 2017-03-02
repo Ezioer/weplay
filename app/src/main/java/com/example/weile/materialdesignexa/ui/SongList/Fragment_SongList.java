@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.example.weile.materialdesignexa.R;
 import com.example.weile.materialdesignexa.adapter.AdAdapter;
+import com.example.weile.materialdesignexa.basemvp.BaseView;
 import com.example.weile.materialdesignexa.basemvp.rx.RxManager;
 import com.example.weile.materialdesignexa.basemvp.rx.RxSchedulers;
 import com.example.weile.materialdesignexa.bean.AdBean;
@@ -43,13 +44,14 @@ import rx.schedulers.Schedulers;
 /**
  * Created by weile on 2016/11/14.
  */
-public class Fragment_SongList extends BaseFragment{
+public class Fragment_SongList extends BaseFragment implements BannerView{
     private ArrayList<Song> mSongList=new ArrayList<>();
     private CommonDiyRecAdapter<Song> mAdapter;
     @Bind(R.id.rv_songlist)
     RecyclerView mRecyclerView;
     @Bind(R.id.iv_nosong)
     ImageView mNoSongs;
+    private BannerPresenter mPresenter;
 
     public static Fragment_SongList newInstance() {
         Bundle args = new Bundle();
@@ -68,43 +70,28 @@ public class Fragment_SongList extends BaseFragment{
         init();
     }
 
+    @Override
+    protected boolean isneedani() {
+        return true;
+    }
+
     private void init() {
         initdata();
     }
-
     private void initdata() {
-        new RxManager().add(Observable.just(null)
-        .flatMap(new Func1<Object, Observable<AdBean>>() {
-            @Override
-            public Observable<AdBean> call(Object o) {
-                return RetrofitUtil.getInstance().getApi(4).getAdData().compose(RxSchedulers.<AdBean>io_main());
-            }
-        })
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<AdBean>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(AdBean adBean) {
-                addData(adBean);
-            }
-        }));
+        RequestStart();
+        if(mPresenter==null){
+            mPresenter=new BannerPresenter(this);
+        }
+        mPresenter.getBannerList();
     }
 
     private View mHeader;
     private AutoScrollViewPager mAdPager;
     private CirclePageIndicator mIndicator;
     private AdAdapter mAdAdapter;
-    private void addData(AdBean adBean) {
+    @Override
+    public void refreshDada(AdBean adBean) {
         initSongList();
         if(mHeader==null){
             mHeader= LayoutInflater.from(mContext).inflate(R.layout.mainpage_header,null);

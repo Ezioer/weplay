@@ -60,20 +60,10 @@ public class GirlPhotoListFragment extends BaseFrameFragment<GirlPhotoListPresen
         mAdapter.setOnItemClickListener(new GirlPhotoAdapter.RecyclerViewClick() {
             @Override
             public void onItemClick(View view, int posi) {
-                Intent intent=new Intent(mContext, GirlphotoDetailActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putString("picurl",mList.get(posi).url);
-                intent.putExtras(bundle);
                 ImageView imageView= (ImageView) view.findViewById(R.id.iv_pic);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions
-                            .makeSceneTransitionAnimation(getActivity(), imageView, "transition_animation_girlphotos");
-                    startActivity(intent, options.toBundle());
-                } else {
-                    ActivityOptionsCompat options = ActivityOptionsCompat
-                            .makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0);
-                    ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
-                }
+                goIntentActivity(imageView,GirlphotoDetailActivity.class,bundle);
             }
         });
         mSwipe.setPtrHandler(new PtrDefaultHandler2() {

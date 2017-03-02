@@ -28,7 +28,7 @@ public class InnerCache extends Cache {
         e.printStackTrace();
       }
       try {
-        new File(cachePath, ".nomedia").createNewFile();
+        new File(cachePath+"file").createNewFile();
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -40,9 +40,9 @@ public class InnerCache extends Cache {
     String cachePath;
     if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
         || !Environment.isExternalStorageRemovable()) {
-      cachePath = context.getExternalCacheDir().getPath();
+      cachePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath();
     } else {
-      cachePath = context.getCacheDir().getPath();
+      cachePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath();
     }
     return cachePath;
   }
@@ -65,7 +65,8 @@ public class InnerCache extends Cache {
 
   @Override
   public boolean deleteCacheItem(String fileName) {
-    String filePath = getAbsolutePath(fileName);
-    return FileUtil.deleteFile(filePath);
+    return true;
+    /*String filePath = getAbsolutePath(fileName);
+    return FileUtil.deleteFile(filePath);*/
   }
 }

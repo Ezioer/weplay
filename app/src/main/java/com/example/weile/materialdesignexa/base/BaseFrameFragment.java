@@ -1,9 +1,14 @@
 package com.example.weile.materialdesignexa.base;
 
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -18,6 +23,7 @@ import com.example.weile.materialdesignexa.basemvp.BaseModel;
 import com.example.weile.materialdesignexa.basemvp.BasePresenter;
 import com.example.weile.materialdesignexa.basemvp.BaseView;
 import com.example.weile.materialdesignexa.basemvp.TUtil;
+import com.example.weile.materialdesignexa.ui.girlphotodetail.GirlphotoDetailActivity;
 
 import butterknife.ButterKnife;
 
@@ -108,5 +114,18 @@ public abstract class BaseFrameFragment<P extends BasePresenter,M extends BaseMo
     @Override
     public void NetError() {
 
+    }
+    protected void goIntentActivity(View view,Class <?> T,Bundle bundle){
+        Intent intent=new Intent(getActivity(),T);
+        intent.putExtras(bundle);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation(getActivity(), view, "transition_animation_girlphotos");
+            startActivity(intent, options.toBundle());
+        } else {
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0);
+            ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+        }
     }
 }

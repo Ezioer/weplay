@@ -34,16 +34,14 @@
                   android:theme="@style/AppThemeBase"
                   android:launchMode="singleTask">
         </activity>
-        <activity android:name=".activity.SingerDetailActivity"/>
+        <activity android:name=".ui.artist.SingerDetailActivity"/>
         <activity android:name=".activity.AdActivity"
                   android:theme="@style/AppThemeBase"/>
         <activity android:name=".activity.IntroduceActivity"
                   android:theme="@style/AppThemeBase"/>
-        <activity android:name=".activity.AlbumDetailActivity"/>
+        <activity android:name=".ui.album.AlbumDetailActivity"/>
         <activity android:name=".activity.ThemeSettingActivity"/>
         <activity android:name=".activity.MyLoveActivity"/>
-        <activity android:name=".activity.DoubanMomentActivity"/>
-        <activity android:name=".activity.DoubanMomentDetailActivity"/>
         <activity android:name=".ui.girlphoto.GirlPhotoListActivity"/>
         <activity android:name=".ui.girlphotodetail.GirlphotoDetailActivity"/>
         <activity android:name=".activity.TestActivity"/>

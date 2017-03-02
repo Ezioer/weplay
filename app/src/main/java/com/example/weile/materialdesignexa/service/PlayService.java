@@ -24,6 +24,7 @@ public class PlayService extends Service {
     public static final String ACTION_PLAY_ALBUM = "ACTION_PLAY_ALBUM";
     public static final String ACTION_PLAY_PLAYLIST = "ACTION_PLAY_PLAYLIST";
     public static final String ACTION_PLAY_ARTIST = "ACTION_PLAY_ARTIST";
+    public static final String UPDATESTATE="UPDATESTATE";
     public static final String ACTION_GET_SONG = "ACTION_GET_SONG";
     public static final String ACTION_NOTI_CLICK = "ACTION_NOTI_CLICK";
     public static final String ACTION_NOTI_REMOVE = "ACTION_NOTI_REMOVE";
@@ -51,6 +52,9 @@ public class PlayService extends Service {
         switch (intent.getAction()) {
             case ACTION_PLAY_ALL_SONGS:
                 playAllSongs(intent);
+                break;
+            case UPDATESTATE:
+                updateState();
                 break;
             case ACTION_SEEK_SONG:
                 mMusicPlayHandler.playSeekPosi(intent.getIntExtra("currentposi",0));
@@ -80,6 +84,23 @@ public class PlayService extends Service {
                 break;
 
         }
+    }
+
+    private void updateState() {
+        Intent intent=new Intent();
+        intent.setAction(Tag.CURRENT_PLAYSONG);
+        intent.putExtra("isplaying", mMusicPlayHandler.getmMediaPlayer().isPlaying());
+        intent.putExtra("songid", mMusicPlayHandler.getCurrentPlaySongId());
+        intent.putExtra("songname", mMusicPlayHandler.getCurrentPlaySongName());
+        intent.putExtra("albumid", mMusicPlayHandler.getCurrentPlaySongAblumid());
+        intent.putExtra("albumname", mMusicPlayHandler.getCurrentPlaySongAblumName());
+        intent.putExtra("seek", mMusicPlayHandler.getmMediaPlayer().getCurrentPosition());
+        intent.putExtra("pos", mMusicPlayHandler.getPlayPos());
+        intent.putExtra("dur",mMusicPlayHandler.getCurrentPlaySong().getDuration());
+        intent.putExtra("duration",mMusicPlayHandler.getCurrentPlaySong().duration());
+        intent.putExtra("totaldur",mMusicPlayHandler.getCurrentPlaySong().getSeconds());
+        intent.putExtra("artist",mMusicPlayHandler.getCurrentPlaySongArtist());
+        sendBroadcast(intent);
     }
 
     private void playAllSongs(Intent intent) {
@@ -137,6 +158,7 @@ public class PlayService extends Service {
         intentFilter.addAction(ACTION_NOTI_CLICK);
         intentFilter.addAction(ACTION_NOTI_REMOVE);
         intentFilter.addAction(ACTION_SEEK_SONG);
+        intentFilter.addAction(UPDATESTATE);
         registerReceiver(playReceiver, intentFilter);
         mNotificationUtil = new NotificationUtil(mContext, this);
         return START_NOT_STICKY;

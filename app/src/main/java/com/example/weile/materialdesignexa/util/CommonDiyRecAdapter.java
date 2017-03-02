@@ -67,7 +67,7 @@ public abstract class CommonDiyRecAdapter<T> extends RecyclerView.Adapter<Recycl
                      if(listener!=null){
                          int posi=viewHolder.getAdapterPosition();
                          mPosi=posi;
-                         listener.onItemClick(parent,v,viewHolder,posi);
+                         listener.onItemClick(parent,v,viewHolder,posi-1);
                      }
                  }
              });

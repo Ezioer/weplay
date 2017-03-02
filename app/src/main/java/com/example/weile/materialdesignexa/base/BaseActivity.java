@@ -114,7 +114,7 @@ public abstract class BaseActivity extends SwipeActivity {
     }
     protected void initData(){
     }
-    public void goActivity(Class<?> t){
+    protected void goActivity(Class<?> t){
         Intent intent=new Intent(this,t);
         startActivity(intent);
 
